@@ -1,3 +1,4 @@
+import win32con
 import win32gui
 
 
@@ -20,5 +21,9 @@ def select_window(windows, item):
 def get_window_info(hwnd):
     rect = win32gui.GetWindowRect(hwnd)
     title = win32gui.GetWindowText(hwnd)
-    return {"hwnd": hwnd, "title": title, "x": rect[0], "y": rect[1], "width": rect[2] - rect[0], "height": rect[3] - rect[1]}
+    return {"hwnd": hwnd, "title": title, "x": rect[0], "y": rect[1], "width": rect[2] - rect[0],
+            "height": rect[3] - rect[1]}
 
+
+def destroy_window(hwnd):
+    win32gui.SendMessage(hwnd, win32con.WM_CLOSE, 0, 0)
